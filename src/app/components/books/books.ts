@@ -10,7 +10,7 @@ import { BookService } from '../../services/book';
 })
 export class BooksComponent {
   books: any[] = [];
-  isloading = false;
+  isLoading = false;
 
   constructor(private bookService: BookService) { }
 
@@ -19,15 +19,15 @@ export class BooksComponent {
   }
 
   loadBooks() {
-    this.isloading = true;
+    this.isLoading = true;
     this.bookService.getBooks().subscribe({
       next: (data) => {
         this.books = data;
-        this.isloading = false;
+        this.isLoading = false;
       },
       error: (error) => {
         console.error('Error loading books:', error);
-        this.isloading=false;
+        this.isLoading=false;
       }
     });
   }
