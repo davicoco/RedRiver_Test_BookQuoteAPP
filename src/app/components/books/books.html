@@ -1,1 +1,19 @@
-<p>books works!</p>
+<div class="container">
+    <h1>Böcker</h1>
+
+    <div *ngIf="isLoading">Laddar Böcker...</div>
+
+    <div *ngIf="!isLoading && books.length === 0">
+        <p>Inga böcker hittades. Lägg till böcker!</p>
+    </div>
+
+    <div *ngIf="!isLoading && books.length > 0">
+        <ul>
+            <li *ngFor="let book of books">
+                <strong>{{book.title}}</strong> by {{book.author}}
+                <br>
+                <small>Genre: {{book.genre}} | Published: {{book.publicationDate | date}}</small>
+            </li>
+        </ul>
+    </div>
+</div>
