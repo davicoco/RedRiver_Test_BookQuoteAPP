@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { BookService } from '../../services/book';
 
 @Component({
   selector: 'app-books',
