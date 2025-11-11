@@ -1,54 +1,85 @@
-<div class="container">
-    <h1>Bokförvaltning</h1>
-
-    <button (click)="openAddForm()" *ngIf="!showForm">Lägg till ny bok</button>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb4">
+        <h1><i class="fas fa-book"></i>Bokförvaltning</h1>
+        <button class="btn btn-primary" (click)="openAddForm()" *ngIf="" showForm>
+            <i class="fas fa-plus"></i>Lägg till ny bok
+        </button>
+    </div>
 
     <!---->
     <!--Form-->
-    <div *ngIf="showForm" class="form-container">
-        <h2>{{editMode ? 'Redigera' : 'Lägg till'}} Bok</h2>
-        <form (ngSubmit)="saveBook()">
-            <div>
-                <label>Titel:</label>
-                <input [(ngModel)]="currentBook.title" name="title" required>
-            </div>
-            <div>
-                <label>Författare:</label>
-                <input [(ngModel)]="currentBook.author" name="author" required>
-            </div>
-            <div>
-                <label>Genre:</label>
-                <input [(ngModel)]="currentBook.genre" name="genre" required>
-            </div>
-            <div>
-                <label>Publiceringsdatum</label>
-                <input type="date" [(ngModel)]="currentBook.publicationDate" name="date" required>
-            </div>
-            <button type="submit">Spara</button>
-            <button type="button" (click)="closeForm()">Avbryt</button>
-        </form>
+    <div *ngIf="showForm" class="card mb-4">
+        <div class="card-reader">
+            <h3>{{editMode? 'Redigera' : 'Lägg till'}} Bok</h3>
+        </div>
+        <div class="card-body">
+            <form (ngSubmit)="saveBook()">
+                <div class="mb-3">
+                    <label class="form-label">Titel</label>
+                    <input type="text" class="form-control" [(ngModel)]="currentBook.title" name="title" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Författare</label>
+                    <input type="text" class="form-control" [(ngMode)]="currentBook.author" name="author" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Genre</label>
+                    <input type="text" class="form-control" [(ngModel)]="currentBook.genre" name="genre" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Publiceringsdatum</label>
+                    <input type="date" class="form-control" [(ngModel)]="currentBook.publicationDate" name="date"
+                        required>
+                </div>
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-times"></i> Spara
+                </button>
+                <button type="button" class="btn btn-secondary ms-2" (click)="closeForm()">
+                    <i class="fa fa-times"></i> Avbryt
+                </button>
+            </form>
+        </div>
     </div>
 
     <!--Loading-->
-    <div *ngIf="isLoading">Laddar Böcker...</div>
+    <div *ngIf="isLoading" class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Laddar...</span>
+        </div>
+    </div>
 
     <!--Empty state-->
-    <div *ngIf="!isLoading && books.length === 0 && !showForm">
-        <p>Inga böcker hittades. Lägg till böcker!</p>
+    <div *ngIf="!isLoading && books.length === 0 && !showForm" class="alert alert-info">
+        <i class="fas fa-info-circle"></i> Inga böcker hittades. Lägg till böcker!
     </div>
 
     <!--Books list-->
     <div *ngIf="!isLoading && books.length > 0 && !showForm">
-        <h2>Boklista</h2>
-        <ul>
-            <li *ngFor="let book of books">
-                <strong>{{book.title}}</strong> av {{book.author}}
-                <br>
-                <small>Genre: {{book.genre}} | Publiserad: {{book.publicationDate | date}}</small>
-                <br>
-                <button (click)="openEditForm(book)">Redigera</button>
-                <button (click)="deleteBook(book.id)">Radera</button>
-            </li>
-        </ul>
+        <h2 class="mb-3">Boklista ({{books.length}})</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-3" *ngFor="letbook of books">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{book.title}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{book.author}}</h6>
+                        <p class="card-text">
+                            <span class="badge bg-info">{{book.genre}}</span>
+                            <br>
+                            <small class="text-muted">
+                                <i class="fas fa-calendar"></i>{{book.publicationDate | date}}
+                            </small>
+                        </p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <button class="btn btn-sm btn-warning" (click)="openEditForm(book)">
+                            <i class="fas fa-edit"></i> Redigera
+                        </button>
+                        <button class="btn btn-sm btn-danger ms-2" (click)="deleteBook(book.id)">
+                            <i class="fas fa-trash"></i> Radera
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
