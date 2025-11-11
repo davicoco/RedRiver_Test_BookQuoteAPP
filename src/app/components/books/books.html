@@ -1,18 +1,53 @@
 <div class="container">
-    <h1>Böcker</h1>
+    <h1>Bokförvaltning</h1>
 
+    <button (click)="openAddForm()" *ngIf="!showForm">Add New Book</button>
+
+    <!---->
+    <!--Form-->
+    <div *ngIf="showForm" class="form-container">
+        <h2>{{editMode ? 'Redigera' : 'Lägg till'}} Bok</h2>
+        <form (ngSubmit)="saveBook()">
+            <div>
+                <label>Titel:</label>
+                <input [(ngModel)]="currentBook.title" name="title" required>
+            </div>
+            <div>
+                <label>Författare:</label>
+                <input [(ngModel)]="currentBook.author" name="author" required>
+            </div>
+            <div>
+                <label>Genre:</label>
+                <input [(ngModel)]="currentBook.genre" name="genre" required>
+            </div>
+            <div>
+                <label>Publiceringsdatum</label>
+                <input type="date" [(ngModel)]="currentBook.publicationDate" name="date" required>
+            </div>
+            <button type="submit">Spara</button>
+            <button type="button" (click)="closeForm()">Avbryt</button>
+        </form>
+    </div>
+
+    <!--Loading-->
     <div *ngIf="isLoading">Laddar Böcker...</div>
 
-    <div *ngIf="!isLoading && books.length === 0">
+    <!--Empty state-->
+    <div *ngIf="!isLoading && books.length === 0 && !showForm">
         <p>Inga böcker hittades. Lägg till böcker!</p>
     </div>
 
-    <div *ngIf="!isLoading && books.length > 0">
+    <!--Books list-->
+    <div *ngIf="!isLoading && books.length > 0 && !showForm">
+        <h2>Boklista</h2>
         <ul>
             <li *ngFor="let book of books">
-                <strong>{{book.title}}</strong> by {{book.author}}
+                <strong>{{book.title}}</strong> av {{book.author}}
                 <br>
-                <small>Genre: {{book.genre}} | Published: {{book.publicationDate | date}}</small>
+                <small>Genre: {{book.genre}} | Publiserad: {{book.publicationDate | date}}</small>
+                <br>
+                <button (click)="openEditForm(book)">Redigera</button>
+                <button (click)="deleteBook(book.id)">Radera</button>
             </li>
         </ul>
     </div>
