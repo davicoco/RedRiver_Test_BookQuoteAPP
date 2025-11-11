@@ -11,10 +11,13 @@ import { Title } from '@angular/platform-browser';
   styleUrl: './books.css',
 })
 export class BooksComponent {
+
   books: any[] = [];
+  
   isLoading = false;
   showForm = false;
   editMode = false;
+
   currentBook: any ={
     title: '',
     author: '',
