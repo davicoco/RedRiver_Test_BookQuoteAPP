@@ -1,16 +1,16 @@
 <div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb4">
-        <h1><i class="fas fa-book"></i>Bokförvaltning</h1>
-        <button class="btn btn-primary" (click)="openAddForm()" *ngIf="" showForm>
-            <i class="fas fa-plus"></i>Lägg till ny bok
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1><i class="fas fa-book"></i> Bokförvaltning</h1>
+        <button class="btn btn-primary" (click)="openAddForm()" *ngIf="!showForm" >
+            <i class="fas fa-plus"></i> Lägg till ny bok
         </button>
     </div>
 
     <!---->
     <!--Form-->
     <div *ngIf="showForm" class="card mb-4">
-        <div class="card-reader">
-            <h3>{{editMode? 'Redigera' : 'Lägg till'}} Bok</h3>
+        <div class="card-header">
+            <h3>{{ editMode ? 'Redigera' : 'Lägg till'}} Bok</h3>
         </div>
         <div class="card-body">
             <form (ngSubmit)="saveBook()">
@@ -28,8 +28,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Publiceringsdatum</label>
-                    <input type="date" class="form-control" [(ngModel)]="currentBook.publicationDate" name="date"
-                        required>
+                    <input type="date" class="form-control" [(ngModel)]="currentBook.publicationDate" name="date" required>
                 </div>
                 <button type="submit" class="btn btn-success">
                     <i class="fas fa-times"></i> Spara
