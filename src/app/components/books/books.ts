@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookService } from '../../services/book';
 import { FormsModule } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-books',
@@ -12,6 +13,14 @@ import { FormsModule } from '@angular/forms';
 export class BooksComponent {
   books: any[] = [];
   isLoading = false;
+  showForm = false;
+  editMode = false;
+  currentBook: any ={
+    title: '',
+    author: '',
+    genre: '',
+    publicationDate: ''
+  };
 
   constructor(private bookService: BookService) { }
 
@@ -28,7 +37,7 @@ export class BooksComponent {
       },
       error: (error) => {
         console.error('Error loading books:', error);
-        this.isLoading=false;
+        this.isLoading = false;
       }
     });
   }
