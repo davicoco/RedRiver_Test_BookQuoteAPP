@@ -57,7 +57,7 @@ export class BooksComponent {
     this.currentBook = { ...book };
   }
 
-  savebook() {
+  saveBook() {
     if (this.editMode) {
       this.bookService.updateBook(this.currentBook.id, this.currentBook).subscribe({
         next: () => {
