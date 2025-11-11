@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { QuoteService } from '../../services/quote';
 
 @Component({
   selector: 'app-quotes',
@@ -8,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class Quotes {
 
+  quotes: any[] = [];
+
+  
 }
