@@ -39,7 +39,7 @@ export class BooksComponent {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error loading books:', error);
+        console.error('Fel vid laddning av böcker: ', error);
         this.isLoading = false;
       }
     });
