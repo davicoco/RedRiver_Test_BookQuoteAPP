@@ -25,6 +25,7 @@ export class BooksComponent {
     publicationDate: ''
   };
 
+  //service injected
   constructor(private bookService: BookService) { }
 
   ngOnInit() {

@@ -22,6 +22,7 @@ export class QuotesComponent {
     author: ''
   };
 
+  //service injected
   constructor(private quoteService: QuoteService) { }
 
   ngOnInit() {

@@ -4,5 +4,6 @@ import { QuotesComponent } from './components/quotes/quotes';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/quotes', pathMatch: 'full' },
+    { path: 'books', component: BooksComponent },
     { path: 'quotes', component: QuotesComponent}
 ];
