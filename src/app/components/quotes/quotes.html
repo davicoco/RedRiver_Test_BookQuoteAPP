@@ -13,19 +13,19 @@
             <h3>{{ editMode ? 'Redigera' : 'Lägg till' }} Citat</h3>
         </div>
         <div class="card-body">
-            <form (ngSubmit)="saveBook()">
+            <form (ngSubmit)="saveQuote()">
                 <div class="mb-3">
                     <label class="form-label">Citat</label>
-                    <input type="text" class="form-control" [(ngModel)]="currentQuote.quote" required>
+                    <input type="text" class="form-control" [(ngModel)]="currentQuote.quoteText" name="quoteText" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Författare</label>
-                    <input type="text" class="form-control" [(ngModel)]="currentQuote.author" required>
+                    <input type="text" class="form-control" [(ngModel)]="currentQuote.author" name="author" required>
                 </div>
                 <button type="submit" class="btn btn-success">
                     <i class="fas fa-times"></i> Spara
                 </button>
-                <button type="submit" class="btn btn-secondary ms-2" (click)="closeForm()">
+                <button type="button" class="btn btn-secondary ms-2" (click)="closeForm()">
                     <i class="fas fa-times"></i> Avbryt
                 </button>
             </form>

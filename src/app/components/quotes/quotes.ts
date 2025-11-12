@@ -44,7 +44,7 @@ export class QuotesComponent {
 
   openAddForm() {
     this.showForm = true;
-    this.editMode = true;
+    this.editMode = false;
     this.currentQuote = { quoteText: '', author: '' };
   }
 
@@ -54,14 +54,14 @@ export class QuotesComponent {
     this.currentQuote = { ...quote };
   }
 
-  saveBook() {
+  saveQuote() {
     if (this.editMode) {
       this.quoteService.updateQuote(this.currentQuote.id, this.currentQuote).subscribe({
         next: () => {
           this.loadQuotes();
           this.closeForm();
         },
-        error: (error) => console.error('Fel vvid uppdatering', error)
+        error: (error) => console.error('Fel vid uppdatering', error)
       });
     } else {
       this.quoteService.addQuote(this.currentQuote).subscribe({
@@ -69,13 +69,13 @@ export class QuotesComponent {
           this.loadQuotes();
           this.closeForm();
         },
-        error: (error) => console.error('Fel när man ska lägga till bok', error)
+        error: (error) => console.error('Fel när man ska lägga till citat', error)
       });
     }
   }
 
   deleteQuote(id:number){
-    if(confirm('Vill du radera denna bok?')){
+    if(confirm('Vill du radera detta citat?')){
       this.quoteService.deleteQuote(id).subscribe({
         next: () => this.loadQuotes(),
         error: (error) => console.error('Fel vvid radering', error)

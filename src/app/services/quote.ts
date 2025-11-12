@@ -19,7 +19,7 @@ export class QuoteService {
   }
 
   updateQuote(id: number, quote: any): Observable<any> {
-    return this.http.put<any>(`${id}/${this.apiUrl}`, quote);
+    return this.http.put<any>(`${this.apiUrl}/${id}`, quote);
   }
 
   deleteQuote(id: number): Observable<any> {
