@@ -9,7 +9,7 @@ import { QuoteService } from '../../services/quote';
   templateUrl: './quotes.html',
   styleUrl: './quotes.css',
 })
-export class Quotes {
+export class QuotesComponent {
 
   quotes: any[] = [];
 
@@ -18,7 +18,7 @@ export class Quotes {
   editMode = false;
 
   currentQuote: any = {
-    quote: '',
+    quoteText: '',
     author: ''
   };
 
@@ -45,7 +45,7 @@ export class Quotes {
   openAddForm() {
     this.showForm = true;
     this.editMode = true;
-    this.currentQuote = { quote: '', author: '' };
+    this.currentQuote = { quoteText: '', author: '' };
   }
 
   openEditForm(quote: any) {
@@ -85,6 +85,6 @@ export class Quotes {
 
   closeForm() {
     this.showForm = false;
-    this.currentQuote = { quote: '', author: '' };
+    this.currentQuote = { quoteText: '', author: '' };
   }
 }

@@ -1,1 +1,69 @@
-<p>quotes works!</p>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between alint-items-center mb-4">
+        <h1><i class="fas fa-book"></i> Citat</h1>
+        <button class="btn btn-primary" (click)="openAddForm()" *ngIf="!showForm">
+            <i class="fas fa-plus"></i> Lägg till Citat
+        </button>
+    </div>
+
+    <!---->
+    <!--Form-->
+    <div *ngIf="showForm" class="card mb-4">
+        <div class="card-header">
+            <h3>{{ editMode ? 'Redigera' : 'Lägg till' }} Citat</h3>
+        </div>
+        <div class="card-body">
+            <form (ngSubmit)="saveBook()">
+                <div class="mb-3">
+                    <label class="form-label">Citat</label>
+                    <input type="text" class="form-control" [(ngModel)]="currentQuote.quote" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Författare</label>
+                    <input type="text" class="form-control" [(ngModel)]="currentQuote.author" required>
+                </div>
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-times"></i> Spara
+                </button>
+                <button type="submit" class="btn btn-secondary ms-2" (click)="closeForm()">
+                    <i class="fas fa-times"></i> Avbryt
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!--loading-->
+    <div *ngIf="isLoading" class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Laddar...</span>
+        </div>
+    </div>
+
+    <!--Empty State-->
+    <div *ngIf="!isLoading && quotes.length === 0 && !showForm" class="alert alert-info">
+        <i class="fas fa-info-circle"></i> Inga citat hittades. Lägg till citat!
+    </div>
+
+    <!--Quotes list-->
+    <div *ngIf="!isLoading && quotes.length > 0 && !showForm">
+        <h2 class="mb-3">CitatLista ({{quotes.length}})</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-3" *ngFor="let quote of quotes">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{quote.quoteText}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{quote.author}}</h6>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <button class="btn btn-sm btn-warning" (click)="openEditForm(quote)">
+                            <i class="fas fa-edit"></i> Redigera
+                        </button>
+                        <button class="btn btn-sm btn-danger ms-2" (click)="deleteQuote(quote.id)">
+                            <i class="fas fa-trash"></i> Radera
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
