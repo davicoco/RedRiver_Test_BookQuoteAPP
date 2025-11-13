@@ -1,21 +1,45 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <i class="fas fa-book-reader"></i> Startsida
+        <a class="navbar-brand" routerLink="/">
+            <i class="fas fa-book-reader"></i> BokSajten
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/books" routerLinkActive="active">
-                        <i class="fas fa-book"></i> Böcker
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/quotes" routerLinkActive="active">
-                        <i class="fas fa-quote-left"></i> Citat
+            <ul class="navbar-nav me-auto">
+
+                <!--visa endast när man är inloggad-->
+                <ng-container *ngIf="authService.isLoggedIn()">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/books" routerLinkActive="active">
+                            <i class="fas fa-book"></i> Böcker
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/quotes" routerLinkActive="active">
+                            <i class="fas fa-quote-left"></i> Citat
+                        </a>
+                    </li>
+                </ng-container>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <ng-container *ngIf="!authService.isLoggedIn()">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/login">
+                            <i class="fas fa-sign-in-alt"></i> Logga in
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/register">
+                            <i class="fas fa-user-plus"></i> Registrera
+                        </a>
+                    </li>
+                </ng-container>
+
+                <li class="nav-item" *ngIf="authService.isLoggedIn()">
+                    <a class="nav-link" (click)="logout()" style="cursor: pointer;">
+                        <i class="fas fa-sign-out-alt"></i> Logga ut
                     </a>
                 </li>
             </ul>
