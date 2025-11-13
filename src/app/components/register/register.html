@@ -1,1 +1,55 @@
-<p>register works!</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Registrera dig!</h2>
+                    <div *ngIf="errorMessage" class="alert alert-danger">
+                        {{errorMessage}}
+                    </div>
+                        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+                            <div class="mb-3">
+                                <label class="form-label">Användarnamn</label>
+                                <input
+                                type="text"
+                                class="form-control"
+                                formControlName="username"
+                                placeholder="Choose username">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">E-postadress</label>
+                                <input
+                                type="email"
+                                class="form-control"
+                                formControlName="email"
+                                placeHolder="din@epostadress.com">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Lösenord</label>
+                                <input
+                                type="password"
+                                class="form-control"
+                                formControlName="password"
+                                placeHolder="Minst 6 bokstäver">
+                            </div>
+
+                            <button
+                            type="submit"
+                            class="btn btn-primary w-100"
+                            [disabled]="registerForm.invalid || isLoading">
+                            {{ isLoading ? 'Skapar konto...' : 'Registrera dig' }}
+                            </button>
+                        </form>
+
+                        <div class="text-center mt-3">
+                            <small>Har du redan ett konto? <a routerLink="/login">Logga in</a></small>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
