@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class QuoteService {
-  private apiUrl = 'https://redriver-test-bookquoteapi.onrender.com/quotes';
+  private apiUrl = 'https://redriver-test-bookquoteapi.onrender.com/api/quotes';
 
   constructor(private http: HttpClient) { }
 
