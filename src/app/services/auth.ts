@@ -24,7 +24,7 @@ interface AuthResponse {
 })
 
 export class AuthService {
-  private apiUrl = 'http://localhost:5176/auth';
+  private apiUrl = 'https://redriver-test-bookquoteapi.onrender.com/auth';
 
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
