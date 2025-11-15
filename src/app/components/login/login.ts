@@ -22,7 +22,7 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router
   ) {
-    //login formulär
+    //login formulär check
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
