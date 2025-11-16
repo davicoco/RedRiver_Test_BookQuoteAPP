@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
 
-                <!--visa endast när man är inloggad-->
+                <!-- Show only when user is logged in -->
                 <ng-container *ngIf="authService.isLoggedIn()">
                     <li class="nav-item">
                         <a class="nav-link" routerLink="/books" routerLinkActive="active">
@@ -24,6 +24,7 @@
                 </ng-container>
             </ul>
             <ul class="navbar-nav ms-auto">
+                <!-- Show login/register links only when user is NOT logged in -->
                 <ng-container *ngIf="!authService.isLoggedIn()">
                     <li class="nav-item">
                         <a class="nav-link" routerLink="/login">
@@ -37,12 +38,14 @@
                     </li>
                 </ng-container>
 
+                <!-- Show logout button only when user is logged in -->
                 <li class="nav-item" *ngIf="authService.isLoggedIn()">
                     <a class="nav-link" (click)="logout()" style="cursor: pointer;">
                         <i class="fas fa-sign-out-alt"></i> Logga ut
                     </a>
                 </li>
 
+                <!-- Theme toggle - always visible -->
                 <li class="nav-item">
                     <a class="nav-link" (click)="toggleTheme()" style="cursor: pointer;">
                         <i class="fas" [ngClass]="(themeService.darkMode$ | async) ? 'fa-sun' : 'fa-moon'"></i>

@@ -12,9 +12,10 @@ import { ThemeService } from '../../services/theme';
 })
 export class NavbarComponent {
 
+  // Services are public to allow template access for auth state and theme
   constructor(
-    public authService: AuthService,
-    public themeService: ThemeService
+    public authService: AuthService, // <- Template can use authService.isAuthenticated$
+    public themeService: ThemeService // <- Template can use themeService.currentTheme
   ) { }
 
   logout(): void {

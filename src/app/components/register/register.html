@@ -4,6 +4,8 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="text-center mb-4">Registrera dig!</h2>
+
+                    <!-- Display error message if registration fails -->
                     <div *ngIf="errorMessage" class="alert alert-danger">
                         {{errorMessage}}
                     </div>

@@ -21,6 +21,7 @@ export class RegisterComponent {
     private authService: AuthService,
     private router: Router
   ) {
+    // Initialize registration form with validation rules
     this.registerForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
@@ -29,6 +30,7 @@ export class RegisterComponent {
   }
 
   onSubmit(): void {
+    // Prevent submission if form is invalid
     if (this.registerForm.invalid) {
       return;
     }
@@ -36,12 +38,16 @@ export class RegisterComponent {
     this.isLoading = true;
     this.errorMessage = '';
 
+    // Call AuthService to register new user
+    // AuthService handles token storage and auto-login via tap() operator
     this.authService.register(this.registerForm.value).subscribe({
       next: (response) => {
+        // Registration successful - user is automatically logged in
         console.log('Du har nu registrerat dig!', response);
         this.router.navigate(['/books']);
       },
       error: (error) => {
+        // Display error message to user
         console.error('Registrering misslyckades', error);
         this.errorMessage = error.error?.message || 'Registrering misslyckades. Var god försök igen.';
       },
@@ -51,6 +57,7 @@ export class RegisterComponent {
     });
   }
 
+  // Check if form field has validation errors and has been touched by user
   isFieldInvalid(fieldName: string): boolean {
     const field = this.registerForm.get(fieldName);
     return !!(field && field.invalid && (field.dirty || field.touched));

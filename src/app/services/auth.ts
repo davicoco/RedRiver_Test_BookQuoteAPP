@@ -26,6 +26,8 @@ interface AuthResponse {
 export class AuthService {
   private apiUrl = 'https://redriver-test-bookquoteapi.onrender.com/auth';
 
+  // Observable for tracking authentication status across the app
+  // Initialized with current token state from localStorage
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
@@ -35,9 +37,9 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/register`, registerDto)
       .pipe(
         tap(response => {
-          //sparar token i localStorage
+          // Store JWT token in localStorage for persistence
           this.saveToken(response.token);
-          //säger till appen att användare är inloggad 
+          // Notify all subscribers that user is now authenticated 
           this.isAuthenticatedSubject.next(true); 
         })
       );
@@ -54,30 +56,30 @@ export class AuthService {
   }
 
   logout(): void {
-    //raderar token
+    // Remove token from localStorage
     localStorage.removeItem('token'); 
-    //loggar ut användare 
+    // Update authentication state
     this.isAuthenticatedSubject.next(false) 
-    //redirectar till '/login'
+    // Redirect to login page
     this.router.navigate(['/login']) 
   }
 
-  //sparar token
+  // Store JWT token in browser's localStorage
   private saveToken(token: string): void {
     localStorage.setItem('token', token);
   }
 
-  //hämtar token från localstorage
+  // Retrieve JWT token from localStorage (used by AuthInterceptor)
   getToken(): string | null {
     return localStorage.getItem('token')
   }
 
-  //verifierar att man har token (måste få ett värde)
+  // Check if token exists (!! converts to boolean)
   private hasToken(): boolean {
     return !!this.getToken();
   }
 
-  //kollar så man är inloggad
+  // Public method to check authentication status
   isLoggedIn(): boolean {
     return this.hasToken();
   }

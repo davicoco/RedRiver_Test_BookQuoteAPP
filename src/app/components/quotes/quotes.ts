@@ -13,16 +13,18 @@ export class QuotesComponent {
 
   quotes: any[] = [];
 
+  // UI state management
   isLoading = false;
   showForm = false;
   editMode = false;
 
+  // Current quote being created or edited
   currentQuote: any = {
     quoteText: '',
     author: ''
   };
 
-  //service injected
+  // Inject QuoteService for API communication
   constructor(private quoteService: QuoteService) { }
 
   ngOnInit() {
@@ -30,6 +32,7 @@ export class QuotesComponent {
   }
 
   loadQuotes() {
+    // Fetch all quotes from API (AuthInterceptor automatically adds JWT token)
     this.isLoading = true;
     this.quoteService.getQuotes().subscribe({
       next: (data) => {
@@ -46,17 +49,21 @@ export class QuotesComponent {
   openAddForm() {
     this.showForm = true;
     this.editMode = false;
+    // Reset form for new quote
     this.currentQuote = { quoteText: '', author: '' };
   }
 
   openEditForm(quote: any) {
     this.showForm = true;
     this.editMode = true;
+    // Create copy to avoid mutating original quote object
     this.currentQuote = { ...quote };
   }
 
   saveQuote() {
+    // Handle both create and update operations
     if (this.editMode) {
+      // Update existing quote
       this.quoteService.updateQuote(this.currentQuote.id, this.currentQuote).subscribe({
         next: () => {
           this.loadQuotes();
@@ -65,6 +72,7 @@ export class QuotesComponent {
         error: (error) => console.error('Fel vid uppdatering', error)
       });
     } else {
+      // Create new quote
       this.quoteService.addQuote(this.currentQuote).subscribe({
         next: () => {
           this.loadQuotes();
@@ -76,6 +84,7 @@ export class QuotesComponent {
   }
 
   deleteQuote(id:number){
+    // Confirm before deleting to prevent accidental deletion
     if(confirm('Vill du radera detta citat?')){
       this.quoteService.deleteQuote(id).subscribe({
         next: () => this.loadQuotes(),
