@@ -35,8 +35,10 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/register`, registerDto)
       .pipe(
         tap(response => {
+          //sparar token i localStorage
           this.saveToken(response.token);
-          this.isAuthenticatedSubject.next(true);
+          //säger till appen att användare är inloggad 
+          this.isAuthenticatedSubject.next(true); 
         })
       );
   }
@@ -52,23 +54,30 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    this.isAuthenticatedSubject.next(false)
-    this.router.navigate(['/login'])
+    //raderar token
+    localStorage.removeItem('token'); 
+    //loggar ut användare 
+    this.isAuthenticatedSubject.next(false) 
+    //redirectar till '/login'
+    this.router.navigate(['/login']) 
   }
 
+  //sparar token
   private saveToken(token: string): void {
     localStorage.setItem('token', token);
   }
 
+  //hämtar token från localstorage
   getToken(): string | null {
     return localStorage.getItem('token')
   }
 
+  //verifierar att man har token (måste få ett värde)
   private hasToken(): boolean {
     return !!this.getToken();
   }
 
+  //kollar så man är inloggad
   isLoggedIn(): boolean {
     return this.hasToken();
   }
