@@ -1,59 +1,26 @@
-# BookQuoteApp
+# Book Quote App – Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.9.
+A fullstack application for saving and managing favorite book quotes.
+Built as a technical test for an internship at Red River Consulting & Software AB.
 
-## Development server
+**Live demo:** https://spontaneous-selkie-760b6f.netlify.app/login
+**Backend repo:** https://github.com/davicoco/RedRiver_Test_BookQuoteAPI
 
-To start a local development server, run:
+## Stack
+- Angular & TypeScript
+- RxJS for state and HTTP
+- JWT-based authentication
+- Responsive design
 
-```bash
+## Features
+- User registration and login with JWT
+- Create, read, update and delete book quotes
+- Protected routes for authenticated users
+
+## Run locally
+\`\`\`bash
+npm install
 ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+\`\`\`
+App runs on http://localhost:4200.
+The backend API must be running — see the backend repo above.
