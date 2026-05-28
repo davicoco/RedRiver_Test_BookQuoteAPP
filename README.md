@@ -18,9 +18,9 @@ Built as a technical test for an internship at Red River Consulting & Software A
 - Protected routes for authenticated users
 
 ## Run locally
-\`\`\`bash
+```bash
 npm install
 ng serve
-\`\`\`
+```
 App runs on http://localhost:4200.
 The backend API must be running — see the backend repo above.
