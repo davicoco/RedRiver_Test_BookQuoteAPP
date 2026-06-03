@@ -1,9 +1,14 @@
+**Live demo:** https://spontaneous-selkie-760b6f.netlify.app/login
+
+*(Backend hosted on Render free tier. First request may take ~50 seconds to wake up the server.)*
+
 # Book Quote App – Frontend
 
 A fullstack application for saving and managing favorite book quotes.
 Built as a technical test for an internship at Red River Consulting & Software AB.
 
 **Live demo:** https://spontaneous-selkie-760b6f.netlify.app/login
+
 **Backend repo:** https://github.com/davicoco/RedRiver_Test_BookQuoteAPI
 
 ## Stack
